@@ -38,7 +38,7 @@ function gulpautoprefixer() {
     }
 
     if (!browsers && args.length) {
-      browsers = [].slice.call(args, 0);
+      browsers = args;
     }
   }
 
