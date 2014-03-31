@@ -25,15 +25,21 @@ function gulpautoprefixer() {
       browsers,
       options;
 
-  if ((arguments.length === 2) && Array.isArray(arguments[0]) && (typeof arguments[1] === 'object') && (arguments[1] !== null)) {
-    browsers = arguments[0];
-    options = arguments[1];
-  } else if ((arguments.length === 1) && Array.isArray(arguments[0])) {
-    browsers = arguments[0];
-  } else if ((arguments.length === 1) && (typeof arguments[0] === 'object') && (arguments[0] !== null)) {
-    options = arguments[0];
-  } else if (arguments.length > 0) {
-    browsers = [].slice.call(arguments, 0);
+  if (arguments.length) {
+    var args = [].slice.call(arguments, 0);
+
+    if (Array.isArray(args[0])) {
+      browsers = args.shift();
+    }
+
+    var lastArg = args[args.length-1];
+    if ((typeof lastArg === 'object') && (lastArg !== null)) {
+      options = args.pop();
+    }
+
+    if (!browsers && args.length) {
+      browsers = [].slice.call(args, 0);
+    }
   }
 
   stream._transform = function(file, unused, done) {
