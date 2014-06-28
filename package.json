@@ -1,6 +1,6 @@
 {
   "name": "gulp-autoprefixer",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Autoprefixer for gulp.",
   "license": "MIT",
   "author":"Michael Ostermann <metrime@icloud.com>",
@@ -12,14 +12,14 @@
     "rework"
   ],
   "dependencies": {
-    "autoprefixer":"~1.1.20140327",
-    "bufferstreams": "0.0.1",
-    "gulp-util": "~2.2.12"
+    "autoprefixer":"^2.0",
+    "bufferstreams": "^0.0.2",
+    "gulp-util": "^2.2.17"
   },
   "main":"index.js",
   "devDependencies": {
     "mocha": "*",
     "should": "*",
-    "event-stream": "~3.1.0"
+    "event-stream": "^3.1.0"
   }
 }
