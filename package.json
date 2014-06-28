@@ -12,14 +12,14 @@
     "rework"
   ],
   "dependencies": {
-    "autoprefixer":"~2.0",
-    "bufferstreams": "0.0.2",
-    "gulp-util": "~2.2.17"
+    "autoprefixer":"^2.0",
+    "bufferstreams": "^0.0.2",
+    "gulp-util": "^2.2.17"
   },
   "main":"index.js",
   "devDependencies": {
     "mocha": "*",
     "should": "*",
-    "event-stream": "~3.1.0"
+    "event-stream": "^3.1.0"
   }
 }
