@@ -12,7 +12,7 @@
     "gulpplugin", "css", "prefix", "rework"
   ],
   "dependencies": {
-    "autoprefixer": "^2.0.2",
+    "autoprefixer": "^2.0.1",
     "bufferstreams": "^0.0.2",
     "gulp-util": "^2.2.17"
   },
