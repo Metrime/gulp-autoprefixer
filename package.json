@@ -3,20 +3,20 @@
   "version": "0.0.8",
   "description": "Autoprefixer for gulp.",
   "license": "MIT",
-  "author":"Michael Ostermann <metrime@icloud.com>",
-  "repository": "https://github.com/Metrime/gulp-autoprefixer.git",
-  "keywords":[
-  	"gulpplugin",
-  	"css",
-    "prefix",
-    "rework"
+  "author": "Michael Ostermann <metrime@icloud.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Metrime/gulp-autoprefixer.git"
+  },
+  "keywords": [
+    "gulpplugin", "css", "prefix", "rework"
   ],
   "dependencies": {
-    "autoprefixer":"^2.0",
+    "autoprefixer": "^2.0.2",
     "bufferstreams": "^0.0.2",
     "gulp-util": "^2.2.17"
   },
-  "main":"index.js",
+  "main": "index.js",
   "devDependencies": {
     "mocha": "*",
     "should": "*",
