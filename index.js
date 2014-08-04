@@ -15,7 +15,7 @@ function autoprefixerTransform(browsers, options) {
     if (err) {
       callback(gutil.PluginError(PLUGIN_NAME, err));
     }
-    var prefixed = prefix(browsers).process(String(buffer), options).css;
+    var prefixed = prefix(browsers, options).process(String(buffer)).css;
     callback(null, new Buffer(prefixed));
   };
 }
