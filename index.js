@@ -60,7 +60,7 @@ function gulpautoprefixer() {
       done();
     } else {
       try {
-        var prefixed = prefix(browsers).process(String(file.contents), options).css;
+        var prefixed = prefix(browsers, options).process(String(file.contents)).css;
         file.contents = new Buffer(prefixed);
       } catch (err) {
         err.fileName = file.path;
