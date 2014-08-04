@@ -9,7 +9,7 @@ require('mocha');
 
 var testBrowsers = ["last 1 version", "> 1%", "ie 8", "ie 7"];
 var testOptions = {
-  cascade: true
+  cascade: false
 };
 
 var testfile = fs.readFileSync("./test/test.css","utf8");
@@ -68,7 +68,7 @@ describe('gulp-autoprefixer', function() {
     });
 
     stream.on('data', function(newFile){
-      String(newFile.contents).should.equal(autoprefixer().process(testfile, testOptions).css);
+      String(newFile.contents).should.equal(autoprefixer(testOptions).process(testfile).css);
       done();
     });
 
@@ -83,7 +83,7 @@ describe('gulp-autoprefixer', function() {
     });
 
     stream.on('data', function(newFile){
-      String(newFile.contents).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile, testOptions).css);
+      String(newFile.contents).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7", testOptions).process(testfile).css);
       done();
     });
 
@@ -98,7 +98,7 @@ describe('gulp-autoprefixer', function() {
     });
 
     stream.on('data', function(newFile){
-      String(newFile.contents).should.equal(autoprefixer(testBrowsers).process(testfile, testOptions).css);
+      String(newFile.contents).should.equal(autoprefixer(testBrowsers, testOptions).process(testfile).css);
       done();
     });
 
