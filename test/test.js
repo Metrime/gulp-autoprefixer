@@ -114,7 +114,7 @@ describe('gulp-autoprefixer', function() {
 
     stream.on('data', function(data) {
       data.contents.pipe(es.wait(function(err, data) {
-        data.should.equal(autoprefixer.process(testfile).css);
+        String(data).should.equal(autoprefixer.process(testfile).css);
         done();
       }));
     });
@@ -132,7 +132,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile).css);
+        String(data).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile).css);
           done();
         }));
       });
@@ -151,7 +151,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer(testBrowsers).process(testfile).css);
+          String(data).should.equal(autoprefixer(testBrowsers).process(testfile).css);
           done();
         }));
       });
@@ -169,7 +169,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer().process(testfile, testOptions).css);
+          String(data).should.equal(autoprefixer(testOptions).process(testfile).css);
           done();
         }));
       });
@@ -187,7 +187,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile, testOptions).css);
+          String(data).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7", testOptions).process(testfile).css);
           done();
         }));
       });
@@ -205,7 +205,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer(testBrowsers).process(testfile, testOptions).css);
+          String(data).should.equal(autoprefixer(testBrowsers, testOptions).process(testfile).css);
           done();
         }));
       });
