@@ -1,7 +1,23 @@
-.foo{
-background:linear-gradient(bottom,#000,#fff);
+.gradient {
+  background: linear-gradient(bottom,#000,#fff);
 }
 
-.bar{
-box-sizing:border-box;
+.box-sizing {
+  box-sizing:border-box;
+}
+
+.text-adjust {
+  text-size-adjust:100%;
+}
+
+.opacity {
+  opacity: .5;
+}
+
+:fullscreen a {
+  transition: transform 1s;
+}
+
+.flex {
+  display: flex;
 }
