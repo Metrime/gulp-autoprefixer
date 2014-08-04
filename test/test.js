@@ -58,7 +58,6 @@ describe('gulp-autoprefixer', function() {
 
     stream.write(fakeFile);
     stream.end();
-
   });
 
   it('should prefix with options', function(done) {
@@ -69,6 +68,36 @@ describe('gulp-autoprefixer', function() {
 
     stream.on('data', function(newFile){
       String(newFile.contents).should.equal(autoprefixer(testOptions).process(testfile).css);
+      done();
+    });
+
+    stream.write(fakeFile);
+    stream.end();
+  });
+
+  it('should prefix with cascade: false', function(done) {
+    var stream = prefix({cascade: false});
+    var fakeFile = new gutil.File({
+      contents: new Buffer(testfile)
+    });
+
+    stream.on('data', function(newFile){
+      String(newFile.contents).should.equal(autoprefixer({cascade: false}).process(testfile).css);
+      done();
+    });
+
+    stream.write(fakeFile);
+    stream.end();
+  });
+
+  it('should prefix with cascade: true', function(done) {
+    var stream = prefix({cascade: true});
+    var fakeFile = new gutil.File({
+      contents: new Buffer(testfile)
+    });
+
+    stream.on('data', function(newFile){
+      String(newFile.contents).should.equal(autoprefixer({cascade: true}).process(testfile).css);
       done();
     });
 
