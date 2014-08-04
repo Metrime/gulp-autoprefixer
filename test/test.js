@@ -9,7 +9,7 @@ require('mocha');
 
 var testBrowsers = ["last 1 version", "> 1%", "ie 8", "ie 7"];
 var testOptions = {
-  cascade: true
+  cascade: false
 };
 
 var testfile = fs.readFileSync("./test/test.css","utf8");
@@ -58,7 +58,6 @@ describe('gulp-autoprefixer', function() {
 
     stream.write(fakeFile);
     stream.end();
-
   });
 
   it('should prefix with options', function(done) {
@@ -68,7 +67,37 @@ describe('gulp-autoprefixer', function() {
     });
 
     stream.on('data', function(newFile){
-      String(newFile.contents).should.equal(autoprefixer().process(testfile, testOptions).css);
+      String(newFile.contents).should.equal(autoprefixer(testOptions).process(testfile).css);
+      done();
+    });
+
+    stream.write(fakeFile);
+    stream.end();
+  });
+
+  it('should prefix with cascade: false', function(done) {
+    var stream = prefix({cascade: false});
+    var fakeFile = new gutil.File({
+      contents: new Buffer(testfile)
+    });
+
+    stream.on('data', function(newFile){
+      String(newFile.contents).should.equal(autoprefixer({cascade: false}).process(testfile).css);
+      done();
+    });
+
+    stream.write(fakeFile);
+    stream.end();
+  });
+
+  it('should prefix with cascade: true', function(done) {
+    var stream = prefix({cascade: true});
+    var fakeFile = new gutil.File({
+      contents: new Buffer(testfile)
+    });
+
+    stream.on('data', function(newFile){
+      String(newFile.contents).should.equal(autoprefixer({cascade: true}).process(testfile).css);
       done();
     });
 
@@ -83,7 +112,7 @@ describe('gulp-autoprefixer', function() {
     });
 
     stream.on('data', function(newFile){
-      String(newFile.contents).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile, testOptions).css);
+      String(newFile.contents).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7", testOptions).process(testfile).css);
       done();
     });
 
@@ -98,7 +127,7 @@ describe('gulp-autoprefixer', function() {
     });
 
     stream.on('data', function(newFile){
-      String(newFile.contents).should.equal(autoprefixer(testBrowsers).process(testfile, testOptions).css);
+      String(newFile.contents).should.equal(autoprefixer(testBrowsers, testOptions).process(testfile).css);
       done();
     });
 
@@ -114,7 +143,7 @@ describe('gulp-autoprefixer', function() {
 
     stream.on('data', function(data) {
       data.contents.pipe(es.wait(function(err, data) {
-        data.should.equal(autoprefixer.process(testfile).css);
+        String(data).should.equal(autoprefixer.process(testfile).css);
         done();
       }));
     });
@@ -132,7 +161,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile).css);
+        String(data).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile).css);
           done();
         }));
       });
@@ -151,7 +180,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer(testBrowsers).process(testfile).css);
+          String(data).should.equal(autoprefixer(testBrowsers).process(testfile).css);
           done();
         }));
       });
@@ -169,7 +198,43 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer().process(testfile, testOptions).css);
+          String(data).should.equal(autoprefixer(testOptions).process(testfile).css);
+          done();
+        }));
+      });
+
+      stream.write(fakeFile);
+      fakeFile.contents.write(testfile);
+      fakeFile.contents.end();
+  });
+  
+  it('should work the same in stream mode, with cascade: false', function(done) {
+      var stream = prefix({ cascade: false});
+      var fakeFile = new gutil.File({
+        contents: new Stream()
+      });
+
+      stream.on('data', function(data) {
+        data.contents.pipe(es.wait(function(err, data) {
+          String(data).should.equal(autoprefixer({ cascade: false}).process(testfile).css);
+          done();
+        }));
+      });
+
+      stream.write(fakeFile);
+      fakeFile.contents.write(testfile);
+      fakeFile.contents.end();
+  });
+
+  it('should work the same in stream mode, with cascade: true', function(done) {
+      var stream = prefix({ cascade: true});
+      var fakeFile = new gutil.File({
+        contents: new Stream()
+      });
+
+      stream.on('data', function(data) {
+        data.contents.pipe(es.wait(function(err, data) {
+          String(data).should.equal(autoprefixer({ cascade: true}).process(testfile).css);
           done();
         }));
       });
@@ -187,7 +252,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile, testOptions).css);
+          String(data).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7", testOptions).process(testfile).css);
           done();
         }));
       });
@@ -205,7 +270,7 @@ describe('gulp-autoprefixer', function() {
 
       stream.on('data', function(data) {
         data.contents.pipe(es.wait(function(err, data) {
-          data.should.equal(autoprefixer(testBrowsers).process(testfile, testOptions).css);
+          String(data).should.equal(autoprefixer(testBrowsers, testOptions).process(testfile).css);
           done();
         }));
       });

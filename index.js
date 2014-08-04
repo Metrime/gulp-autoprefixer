@@ -15,7 +15,7 @@ function autoprefixerTransform(browsers, options) {
     if (err) {
       callback(gutil.PluginError(PLUGIN_NAME, err));
     }
-    var prefixed = prefix(browsers).process(String(buffer), options).css;
+    var prefixed = prefix(browsers, options).process(String(buffer)).css;
     callback(null, new Buffer(prefixed));
   };
 }
@@ -60,7 +60,7 @@ function gulpautoprefixer() {
       done();
     } else {
       try {
-        var prefixed = prefix(browsers).process(String(file.contents), options).css;
+        var prefixed = prefix(browsers, options).process(String(file.contents)).css;
         file.contents = new Buffer(prefixed);
       } catch (err) {
         err.fileName = file.path;
