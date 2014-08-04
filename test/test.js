@@ -207,6 +207,42 @@ describe('gulp-autoprefixer', function() {
       fakeFile.contents.write(testfile);
       fakeFile.contents.end();
   });
+  
+  it('should work the same in stream mode, with cascade: false', function(done) {
+      var stream = prefix({ cascade: false});
+      var fakeFile = new gutil.File({
+        contents: new Stream()
+      });
+
+      stream.on('data', function(data) {
+        data.contents.pipe(es.wait(function(err, data) {
+          String(data).should.equal(autoprefixer({ cascade: false}).process(testfile).css);
+          done();
+        }));
+      });
+
+      stream.write(fakeFile);
+      fakeFile.contents.write(testfile);
+      fakeFile.contents.end();
+  });
+
+  it('should work the same in stream mode, with cascade: true', function(done) {
+      var stream = prefix({ cascade: true});
+      var fakeFile = new gutil.File({
+        contents: new Stream()
+      });
+
+      stream.on('data', function(data) {
+        data.contents.pipe(es.wait(function(err, data) {
+          String(data).should.equal(autoprefixer({ cascade: true}).process(testfile).css);
+          done();
+        }));
+      });
+
+      stream.write(fakeFile);
+      fakeFile.contents.write(testfile);
+      fakeFile.contents.end();
+  });
 
   it('should work the same in stream mode, with browsers and options', function(done) {
       var stream = prefix("last 1 version", "> 1%", "ie 8", "ie 7", testOptions);
