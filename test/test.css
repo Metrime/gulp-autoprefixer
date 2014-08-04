@@ -1,3 +1,7 @@
-.example{
+.foo{
 background:linear-gradient(bottom,#000,#fff);
+}
+
+.bar{
+box-sizing:border-box;
 }
