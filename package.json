@@ -1,25 +1,43 @@
 {
   "name": "gulp-autoprefixer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Autoprefixer for gulp.",
-  "license": "MIT",
-  "author": "Michael Ostermann <metrime@icloud.com>",
+  "author": {
+    "name": "Michael Ostermann",
+    "email": "metrime@icloud.com"
+  },
+  "contributors": [
+    {
+      "name": "Luciano Battagliero",
+      "email": "hi@lucianobattagliero.com"
+    }
+  ],
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Metrime/gulp-autoprefixer.git"
+    "url": "https://github.com/metrime/gulp-autoprefixer"
+  },
+  "bugs": {
+    "url": "https://github.com/metrime/gulp-autoprefixer/issues"
   },
   "keywords": [
-    "gulpplugin", "css", "prefix", "rework"
+    "css",
+    "gulpplugin",
+    "prefix",
+    "rework"
   ],
   "dependencies": {
-    "autoprefixer": "^2.0.1",
+    "autoprefixer": "^2.2.0",
     "bufferstreams": "^0.0.2",
     "gulp-util": "^2.2.17"
   },
-  "main": "index.js",
   "devDependencies": {
+    "event-stream": "^3.1.0",
     "mocha": "*",
-    "should": "*",
-    "event-stream": "^3.1.0"
+    "should": "*"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.0"
   }
 }
