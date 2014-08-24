@@ -1,44 +1,46 @@
 # gulp-autoprefixer
 
-[Autoprefixer](https://github.com/ai/autoprefixer) for [gulp](https://github.com/wearefractal/gulp).
+[Autoprefixer](https://github.com/ai/autoprefixer) for
+[gulp](https://github.com/wearefractal/gulp).
 
-```javascript
+## Install
+
+```sh
+$ npm install gulp-autoprefixer
+```
+
+## Usage
+
+```js
+var gulp = require('gulp');
 var prefix = require('gulp-autoprefixer');
+
+gulp.task('default', function () {
+  return gulp.src('src/styles/*.css')
+    .pipe(prefix())
+    .pipe(gulp.dest('dist/'));
+});
 ```
 
-## Examples
+### Examples
 
-```javascript
-gulp.src('./css/*.css')
-  .pipe(prefix("last 1 version", "> 1%", "ie 8", "ie 7"))
-  .pipe(gulp.dest('./dist/'));
+Specify the [browsers](https://github.com/postcss/autoprefixer#browsers) you
+want to target:
+
+```js
+return gulp.src('src/styles/*.css')
+  .pipe(prefix('last 2 versions', '> 1%', 'ie 9'))
+  .pipe(gulp.dest('dist/'));
 ```
 
-```javascript
-gulp.src('./css/*.css')
-  .pipe(prefix({ cascade: true }))
-  .pipe(gulp.dest('./dist/'));
-```
+Disable the `cascade` option:
 
-```javascript
-gulp.src('./css/*.css')
-  .pipe(prefix("last 1 version", "> 1%", "ie 8", "ie 7", { cascade: true }))
-  .pipe(gulp.dest('./dist/'));
+```js
+return gulp.src('src/styles/*.css')
+  .pipe(prefix('last 2 versions', '> 1%', 'ie 8', {cascade: false}))
+  .pipe(gulp.dest('dist/'));
 ```
-
-```javascript
-gulp.src('./css/*.css')
-  .pipe(prefix(["last 1 version", "> 1%", "ie 8", "ie 7"]))
-  .pipe(gulp.dest('./dist/'));
-```
-
-```javascript
-gulp.src('./css/*.css')
-  .pipe(prefix(["last 1 version", "> 1%", "ie 8", "ie 7"], { cascade: true }))
-  .pipe(gulp.dest('./dist/'));
-```
-
 
 ## License
 
-MIT
+Released under the MIT license.
