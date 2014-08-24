@@ -1,13 +1,13 @@
 .gradient {
-  background: linear-gradient(bottom,#000,#fff);
+  background: linear-gradient(bottom, #000, #fff);
 }
 
 .box-sizing {
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 .text-adjust {
-  text-size-adjust:100%;
+  text-size-adjust: 100%;
 }
 
 .opacity {

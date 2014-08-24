@@ -2,16 +2,15 @@
 
 'use strict';
 
-var prefix          = require('autoprefixer'),
-    gutil           = require('gulp-util'),
-    transform       = require('stream').Transform,
-    bufferstreams   = require('bufferstreams'),
-
-    PLUGIN_NAME     = 'gulp-autoprefixer';
+var prefix = require('autoprefixer');
+var gutil = require('gulp-util');
+var transform = require('stream').Transform;
+var bufferstreams = require('bufferstreams');
+var PLUGIN_NAME = 'gulp-autoprefixer';
 
 function autoprefixerTransform(browsers, options) {
   // Returns a callback that handles the buffered content
-  return function(err, buffer, callback) {
+  return function (err, buffer, callback) {
     if (err) {
       callback(gutil.PluginError(PLUGIN_NAME, err));
     }
@@ -21,9 +20,9 @@ function autoprefixerTransform(browsers, options) {
 }
 
 function gulpautoprefixer() {
-  var stream = new transform({ objectMode: true }),
-      browsers,
-      options;
+  var stream = new transform({objectMode: true}),
+    browsers,
+    options;
 
   if (arguments.length) {
     var args = [].slice.call(arguments, 0);
@@ -32,7 +31,7 @@ function gulpautoprefixer() {
       browsers = args.shift();
     }
 
-    var lastArg = args[args.length-1];
+    var lastArg = args[args.length - 1];
     if ((typeof lastArg === 'object') && (lastArg !== null)) {
       options = args.pop();
     }
@@ -42,7 +41,7 @@ function gulpautoprefixer() {
     }
   }
 
-  stream._transform = function(file, unused, done) {
+  stream._transform = function (file, unused, done) {
     // Pass through if null
     if (file.isNull()) {
       stream.push(file);
