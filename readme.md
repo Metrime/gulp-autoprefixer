@@ -67,6 +67,7 @@ return gulp.src('src/styles/*.css')
       }));
   }))
   .pipe(gulp.dest('css/'));
+```
 
 ## License
 
