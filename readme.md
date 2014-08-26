@@ -41,13 +41,32 @@ return gulp.src('src/styles/*.css')
   .pipe(gulp.dest('dist/'));
 ```
 
-Enable sourcemap option:
+Enable `sourcemap` option:
 
 ```js
-return gulp.src('src/styles/*.css')
-  .pipe(prefix('last 2 versions', '> 1%', 'ie 9', { map: true }))
+return gulp.src('src/styles/app.css')
+  .pipe(prefix('last 2 versions', '> 1%', 'ie 9', { map: true, to: 'app.css' }))
   .pipe(gulp.dest('dist/'));
 ```
+
+Enable `sourcemap` with dynamic filenames or multiple files (requires [`gulp-foreach`](https://www.npmjs.org/package/gulp-foreach)):
+
+```js
+...
+var foreach = require('gulp-foreach');
+...
+
+return gulp.src('src/styles/*.css')
+  .pipe(foreach (function (stream, file) {
+    console.log(path.basename(file.path));
+    return stream
+      .pipe(prefix('last 2 versions', '> 1%', 'ie 8', {
+        cascade: false,
+        map: true,
+        to: path.basename(file.path)
+      }));
+  }))
+  .pipe(gulp.dest('css/'));
 
 ## License
 
