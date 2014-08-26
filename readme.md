@@ -41,6 +41,14 @@ return gulp.src('src/styles/*.css')
   .pipe(gulp.dest('dist/'));
 ```
 
+Enable sourcemap option:
+
+```js
+return gulp.src('src/styles/*.css')
+  .pipe(prefix('last 2 versions', '> 1%', 'ie 9', { map: true }))
+  .pipe(gulp.dest('dist/'));
+```
+
 ## License
 
 Released under the MIT license.
