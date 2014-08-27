@@ -49,7 +49,7 @@ return gulp.src('src/styles/app.css')
   .pipe(gulp.dest('dist/'));
 ```
 
-This will not work with dynamic file names or multiple files. If you need that, please check [`gulp-foreach`](https://www.npmjs.org/package/gulp-foreach).
+**Note:** The `sourcemap` option will not work with dynamic file names or multiple files. If you need that, please check [`gulp-foreach`](https://www.npmjs.org/package/gulp-foreach).
 
 ## License
 
