@@ -49,25 +49,7 @@ return gulp.src('src/styles/app.css')
   .pipe(gulp.dest('dist/'));
 ```
 
-Enable `sourcemap` with dynamic filenames or multiple files (requires [`gulp-foreach`](https://www.npmjs.org/package/gulp-foreach)):
-
-```js
-...
-var foreach = require('gulp-foreach');
-...
-
-return gulp.src('src/styles/*.css')
-  .pipe(foreach (function (stream, file) {
-    console.log(path.basename(file.path));
-    return stream
-      .pipe(prefix('last 2 versions', '> 1%', 'ie 8', {
-        cascade: false,
-        map: true,
-        to: path.basename(file.path)
-      }));
-  }))
-  .pipe(gulp.dest('css/'));
-```
+This will not work with dynamic file names or multiple files. If you need that, please check [`gulp-foreach`](https://www.npmjs.org/package/gulp-foreach).
 
 ## License
 
