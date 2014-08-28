@@ -1,6 +1,6 @@
 {
   "name": "gulp-autoprefixer",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Autoprefixer for gulp.",
   "author": {
     "name": "Michael Ostermann",
