@@ -1,3 +1,5 @@
+'use strict';
+
 var prefix = require('../');
 var should = require('should');
 var fs = require('fs');
@@ -129,6 +131,38 @@ describe('gulp-autoprefixer', function () {
 
     stream.on('data', function (newFile) {
       String(newFile.contents).should.equal(autoprefixer(testBrowsers, testOptions).process(testfile).css);
+      done();
+    });
+
+    stream.write(fakeFile);
+    stream.end();
+  });
+
+  it('should prefix with sourcemaps', function (done) {
+    var localTestOptions = { map: true, to: 'test.css' };
+    var stream = prefix(testBrowsers, localTestOptions);
+    var fakeFile = new gutil.File({
+      contents: new Buffer(testfile)
+    });
+
+    stream.on('data', function (newFile) {
+      String(newFile.contents).should.equal(autoprefixer(testBrowsers, localTestOptions).process(testfile, localTestOptions).css);
+      done();
+    });
+
+    stream.write(fakeFile);
+    stream.end();
+  });
+
+  it('should prefix with cascade and sourcemaps', function (done) {
+    var localTestOptions = { casecade: true, map: true, to: 'test.css' };
+    var stream = prefix(testBrowsers, localTestOptions);
+    var fakeFile = new gutil.File({
+      contents: new Buffer(testfile)
+    });
+
+    stream.on('data', function (newFile) {
+      String(newFile.contents).should.equal(autoprefixer(testBrowsers, localTestOptions).process(testfile, localTestOptions).css);
       done();
     });
 
@@ -296,6 +330,44 @@ describe('gulp-autoprefixer', function () {
       contents: null
     }));
     stream.end();
+  });
+
+  it('should work the same in stream mode, with sourcemaps', function (done) {
+    var localTestOptions = { map: true, to: 'test.css' };
+    var stream = prefix(testBrowsers, localTestOptions);
+    var fakeFile = new gutil.File({
+      contents: new Stream()
+    });
+
+    stream.on('data', function (data) {
+      data.contents.pipe(es.wait(function (err, data) {
+        String(data).should.equal(autoprefixer(testBrowsers, localTestOptions).process(testfile, localTestOptions).css);
+        done();
+      }));
+    });
+
+    stream.write(fakeFile);
+    fakeFile.contents.write(testfile);
+    fakeFile.contents.end();
+  });
+
+  it('should work the same in stream mode, with cascade and sourcemaps', function (done) {
+    var localTestOptions = { cascade: true, map: true, to: 'test.css' };
+    var stream = prefix(testBrowsers, localTestOptions);
+    var fakeFile = new gutil.File({
+      contents: new Stream()
+    });
+
+    stream.on('data', function (data) {
+      data.contents.pipe(es.wait(function (err, data) {
+        String(data).should.equal(autoprefixer(testBrowsers, localTestOptions).process(testfile, localTestOptions).css);
+        done();
+      }));
+    });
+
+    stream.write(fakeFile);
+    fakeFile.contents.write(testfile);
+    fakeFile.contents.end();
   });
 
 });

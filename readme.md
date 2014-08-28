@@ -41,6 +41,16 @@ return gulp.src('src/styles/*.css')
   .pipe(gulp.dest('dist/'));
 ```
 
+Enable `sourcemap` option:
+
+```js
+return gulp.src('src/styles/app.css')
+  .pipe(prefix('last 2 versions', '> 1%', 'ie 9', { map: true, to: 'app.css' }))
+  .pipe(gulp.dest('dist/'));
+```
+
+**Note:** The `sourcemap` option will not work with dynamic file names or multiple files. If you need that, please check [`gulp-foreach`](https://www.npmjs.org/package/gulp-foreach).
+
 ## License
 
 Released under the MIT license.
