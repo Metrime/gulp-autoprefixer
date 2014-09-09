@@ -1,56 +1,11 @@
 # gulp-autoprefixer
 
-[Autoprefixer](https://github.com/ai/autoprefixer) for
-[gulp](https://github.com/wearefractal/gulp).
+The new [gulp-autoprefixer](http://git.io/jRtQGg) is out! Adding support for
+Autoprefixer v3 and its new API. __Be aware__, this plugin it's being developed
+in a new [repo](http://git.io/jRtQGg).
 
-## Install
+The [v0.0.10](http://git.io/Z1FKgA) has been deprecated and it's no longer
+maintained.
 
-```sh
-$ npm install gulp-autoprefixer
-```
-
-## Usage
-
-```js
-var gulp = require('gulp');
-var prefix = require('gulp-autoprefixer');
-
-gulp.task('default', function () {
-  return gulp.src('src/styles/*.css')
-    .pipe(prefix())
-    .pipe(gulp.dest('dist/'));
-});
-```
-
-### Examples
-
-Specify the [browsers](https://github.com/postcss/autoprefixer#browsers) you
-want to target:
-
-```js
-return gulp.src('src/styles/*.css')
-  .pipe(prefix('last 2 versions', '> 1%', 'ie 9'))
-  .pipe(gulp.dest('dist/'));
-```
-
-Disable the `cascade` option:
-
-```js
-return gulp.src('src/styles/*.css')
-  .pipe(prefix('last 2 versions', '> 1%', 'ie 8', {cascade: false}))
-  .pipe(gulp.dest('dist/'));
-```
-
-Enable `sourcemap` option:
-
-```js
-return gulp.src('src/styles/app.css')
-  .pipe(prefix('last 2 versions', '> 1%', 'ie 9', { map: true, to: 'app.css' }))
-  .pipe(gulp.dest('dist/'));
-```
-
-**Note:** The `sourcemap` option will not work with dynamic file names or multiple files. If you need that, please check [`gulp-foreach`](https://www.npmjs.org/package/gulp-foreach).
-
-## License
-
-Released under the MIT license.
+If you don't want to migrate, you could still use [v0.0.10](http://git.io/Z1FKgA)
+—which supports the old API— at your own risk.
